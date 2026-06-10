@@ -1,0 +1,255 @@
+#include "UI/UserWidget.h"
+
+#include "Object/Reflection/ObjectFactory.h"
+#include "UI/UIManager.h"
+#include <RmlUi/Core/Element.h>
+#include <RmlUi/Core/Elements/ElementFormControl.h>
+
+namespace
+{
+	void RegisterWidgetEventListeners(
+		Rml::ElementDocument* Document,
+		const TArray<std::pair<FString, sol::main_protected_function>>& Bindings,
+		const FString& EventName,
+		const FString& LogLabel,
+		TArray<FWidgetEventListener*>& OutListeners)
+	{
+		for (const auto& Binding : Bindings)
+		{
+			Rml::Element* Element = Document->GetElementById(Binding.first);
+			if (!Element)
+			{
+				UE_LOG("[RmlUi] %s target not found: %s", LogLabel.c_str(), Binding.first.c_str());
+				continue;
+			}
+
+			auto* Listener = new FWidgetEventListener(Binding.first, EventName, LogLabel, Binding.second);
+			Element->AddEventListener(EventName.c_str(), Listener);
+			OutListeners.push_back(Listener);
+		}
+	}
+}
+
+void UUserWidget::BeginDestroy()
+{
+    if (HasAnyFlags(RF_BeginDestroy))
+    {
+        return;
+    }
+
+    RemoveFromParent();
+    ReleaseLuaCallbacks();
+    ClearDocument();
+
+    OwningPlayer.Reset();
+
+    UObject::BeginDestroy();
+}
+
+void UUserWidget::AddReferencedObjects(FReferenceCollector& Collector)
+{
+    UObject::AddReferencedObjects(Collector);
+}
+
+void UUserWidget::Initialize(APlayerController* InOwningPlayer, const FString& InDocumentPath)
+{
+	OwningPlayer = InOwningPlayer;
+	DocumentPath = InDocumentPath;
+}
+
+void UUserWidget::AddToViewport(int32 InZOrder)
+{
+	ZOrder = InZOrder;
+	bInViewport = true;
+	UUIManager::Get().AddToViewport(this, InZOrder);
+}
+
+void UUserWidget::RemoveFromParent()
+{
+	UUIManager::Get().RemoveFromViewport(this);
+	bInViewport = false;
+}
+
+void UUserWidget::BindClick(const FString& ElementId, sol::main_protected_function Callback)
+{
+	PendingClickBindings.push_back({ ElementId, Callback });
+	if (IsDocumentLoaded())
+	{
+		RegisterEventListeners();
+	}
+}
+
+void UUserWidget::BindHover(const FString& ElementId, sol::main_protected_function Callback)
+{
+	PendingHoverBindings.push_back({ ElementId, Callback });
+	if (IsDocumentLoaded())
+	{
+		RegisterEventListeners();
+	}
+}
+
+// mousemove는 씬 Tick이 멈춘 일시정지 중에도 UIManager 입력 경로로 디스패치된다 —
+// pause 메뉴의 커서 스프라이트가 이 이벤트로 위치를 갱신한다.
+void UUserWidget::BindMouseMove(const FString& ElementId, sol::main_protected_function Callback)
+{
+	PendingMouseMoveBindings.push_back({ ElementId, Callback });
+	if (IsDocumentLoaded())
+	{
+		RegisterEventListeners();
+	}
+}
+
+void UUserWidget::RegisterEventListeners()
+{
+	if (!Document)
+	{
+		return;
+	}
+
+	ClearEventListeners();
+	RegisterWidgetEventListeners(Document, PendingClickBindings, "click", "click", EventListeners);
+	RegisterWidgetEventListeners(Document, PendingHoverBindings, "mouseover", "hover", EventListeners);
+	RegisterWidgetEventListeners(Document, PendingMouseMoveBindings, "mousemove", "mousemove", EventListeners);
+}
+
+void UUserWidget::ClearEventListeners()
+{
+	if (Document)
+	{
+		for (FWidgetEventListener* Listener : EventListeners)
+		{
+			if (!Listener)
+			{
+				continue;
+			}
+
+			Rml::Element* Element = Document->GetElementById(Listener->GetElementId());
+			if (Element)
+			{
+				Element->RemoveEventListener(Listener->GetEventName().c_str(), Listener);
+			}
+		}
+	}
+
+	for (FWidgetEventListener* Listener : EventListeners)
+	{
+		delete Listener;
+	}
+	EventListeners.clear();
+}
+
+// 위젯이 보유한 Lua 콜백(sol::protected_function) 을 모두 해제한다. 반드시 lua_State 가
+// 살아있는 동안 호출해야 한다 — sol reference 의 소멸자가 luaL_unref(LUA_REGISTRYINDEX) 를
+// 부르는데, 이미 닫힌 state 에 대고 호출하면 lua51.dll 내부에서 액세스 위반으로 죽는다.
+// (ULuaScriptComponent::ClearLuaRuntime 과 동일 원칙. UObject 파괴는 GC 가 맡지만 그 GC 는
+// lua close 이후에도 한 번 더 돌 수 있어, 콜백 해제만은 셧다운 시 미리 끝내 둔다.)
+void UUserWidget::ReleaseLuaCallbacks()
+{
+	ClearEventListeners();
+	PendingClickBindings.clear();
+	PendingHoverBindings.clear();
+	PendingMouseMoveBindings.clear();
+}
+
+void UUserWidget::SetText(const FString& ElementId, const FString& Text)
+{
+	if (!Document)
+	{
+		return;
+	}
+
+	Rml::Element* Element = Document->GetElementById(ElementId);
+	if (!Element)
+	{
+		UE_LOG("[RmlUi] Text target not found: %s", ElementId.c_str());
+		return;
+	}
+
+	Element->SetInnerRML(Text.c_str());
+}
+
+bool UUserWidget::SetProperty(const FString& ElementId, const FString& PropertyName, const FString& Value)
+{
+	if (!Document)
+	{
+		return false;
+	}
+
+	Rml::Element* Element = Document->GetElementById(ElementId);
+	if (!Element)
+	{
+		UE_LOG("[RmlUi] Property target not found: %s", ElementId.c_str());
+		return false;
+	}
+
+	return Element->SetProperty(PropertyName.c_str(), Value.c_str());
+}
+
+bool UUserWidget::SetAttribute(const FString& ElementId, const FString& AttributeName, const FString& Value)
+{
+	if (!Document)
+	{
+		return false;
+	}
+
+	Rml::Element* Element = Document->GetElementById(ElementId);
+	if (!Element)
+	{
+		UE_LOG("[RmlUi] Attribute target not found: %s", ElementId.c_str());
+		return false;
+	}
+
+	// img의 src처럼 스타일 프로퍼티가 아닌 요소 속성용 — SetProperty로 넣으면
+	// RmlUi가 인라인 스타일 파싱 오류를 낸다
+	Element->SetAttribute(AttributeName.c_str(), Rml::String(Value.c_str()));
+	return true;
+}
+
+FString UUserWidget::GetValue(const FString& ElementId) const
+{
+	if (!Document)
+	{
+		return "";
+	}
+
+	Rml::Element* Element = Document->GetElementById(ElementId);
+	if (!Element)
+	{
+		UE_LOG("[RmlUi] Value target not found: %s", ElementId.c_str());
+		return "";
+	}
+
+	Rml::ElementFormControl* FormControl = rmlui_dynamic_cast<Rml::ElementFormControl*>(Element);
+	if (!FormControl)
+	{
+		UE_LOG("[RmlUi] Value target is not a form control: %s", ElementId.c_str());
+		return "";
+	}
+
+	return FormControl->GetValue();
+}
+
+bool UUserWidget::SetValue(const FString& ElementId, const FString& Value)
+{
+	if (!Document)
+	{
+		return false;
+	}
+
+	Rml::Element* Element = Document->GetElementById(ElementId);
+	if (!Element)
+	{
+		UE_LOG("[RmlUi] Value target not found: %s", ElementId.c_str());
+		return false;
+	}
+
+	Rml::ElementFormControl* FormControl = rmlui_dynamic_cast<Rml::ElementFormControl*>(Element);
+	if (!FormControl)
+	{
+		UE_LOG("[RmlUi] Value target is not a form control: %s", ElementId.c_str());
+		return false;
+	}
+
+	FormControl->SetValue(Value.c_str());
+	return true;
+}

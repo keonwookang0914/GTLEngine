@@ -1,0 +1,60 @@
+#pragma once
+
+#include "Core/Singleton.h"
+#include "Core/Types/CoreTypes.h"
+#include "Math/Vector.h"
+#include <fmod.hpp>
+
+class FAudioManager : public TSingleton<FAudioManager>
+{
+	friend class TSingleton<FAudioManager>;
+
+public:
+	bool Initialize();
+	void Shutdown();
+	void Tick();
+
+	bool LoadAudio(const FString& Key, const FString& Path, bool bLoop = false);
+	void PlayAudio(const FString& Key, float Volume = 1.0f);
+	void PlayAudioAt(const FString& Key, const FVector& Location, float Volume = 1.0f, float MinDistance = 300.0f, float MaxDistance = 3000.0f);
+	void PlayManagedAudio(const FString& Key, const FString& ChannelName, float Volume = 1.0f);
+	void PlayBGM(const FString& Key, float Volume = 1.0f);
+	void SetBGMVolume(float Volume);
+	void StopBGM();
+	void StopAllPlayback();
+	void StopManagedAudio(const FString& ChannelName);
+	void PlayLoop(const FString& Key, const FString& LoopName, float Volume = 1.0f, float Pitch = 1.0f);
+	void StopLoop(const FString& LoopName);
+	void StopAllLoops();
+	void SetLoopVolume(const FString& LoopName, float Volume);
+	void SetLoopPitch(const FString& LoopName, float Pitch);
+	bool IsLoopPlaying(const FString& LoopName);
+
+	void SetMasterVolume(float Volume);
+
+private:
+	void LoadDefaultAudios();
+	void Update3DListener();
+	FMOD::Channel* FindPlayingManagedChannel(const FString& ChannelName);
+	FMOD::Channel* FindPlayingLoopChannel(const FString& LoopName);
+
+private:
+	FAudioManager() = default;
+	~FAudioManager() = default;
+
+	// 로드된 사운드 + 재로드 판정용 원본 인자 — 같은 키/경로/루프면 LoadAudio가 재사용
+	struct FLoadedAudio
+	{
+		FMOD::Sound* Sound = nullptr;
+		FString Path;
+		bool bLoop = false;
+	};
+
+	FMOD::System* System = nullptr;
+	FMOD::ChannelGroup* MasterGroup = nullptr;
+	FMOD::Channel* BGMChannel = nullptr;
+
+	TMap<FString, FLoadedAudio> Audios;
+	TMap<FString, FMOD::Channel*> ManagedChannels;
+	TMap<FString, FMOD::Channel*> LoopChannels;
+};
