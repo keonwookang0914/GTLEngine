@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{d38895bd-31b1-4cb1-bd36-d18b0f82ec71}</ProjectGuid>
+    <RootNamespace>jungletechlabweek2</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Engine\Source;$(ProjectDir)Engine\Source\Editor\Public;$(ProjectDir)Engine\Source\Runtime\ApplicationCore\Public;$(ProjectDir)Engine\Source\Runtime\Core\Public;$(ProjectDir)Engine\Source\Runtime\CoreUObject\Public;$(ProjectDir)Engine\Source\Runtime\CoreEngine\Public;$(ProjectDir)Engine\Source\Runtime\Json\Public;$(ProjectDir)Engine\Source\Runtime\Launch\Public;$(ProjectDir)Engine\Source\Runtime\Renderer\Public;$(ProjectDir)Engine\Source\Runtime\Slate\Public;$(ProjectDir)Engine\Source\Runtime\SlateCore\Public;$(ProjectDir)Engine\Source\ThirdParty\imgui;$(ProjectDir)Engine\Source\ThirdParty\nlohmann;$(ProjectDir)Engine\Extras;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Engine\Source;$(ProjectDir)Engine\Source\Editor\Public;$(ProjectDir)Engine\Source\Runtime\ApplicationCore\Public;$(ProjectDir)Engine\Source\Runtime\Core\Public;$(ProjectDir)Engine\Source\Runtime\CoreUObject\Public;$(ProjectDir)Engine\Source\Runtime\CoreEngine\Public;$(ProjectDir)Engine\Source\Runtime\Json\Public;$(ProjectDir)Engine\Source\Runtime\Launch\Public;$(ProjectDir)Engine\Source\Runtime\Renderer\Public;$(ProjectDir)Engine\Source\Runtime\Slate\Public;$(ProjectDir)Engine\Source\Runtime\SlateCore\Public;$(ProjectDir)Engine\Source\ThirdParty\imgui;$(ProjectDir)Engine\Source\ThirdParty\nlohmann;$(ProjectDir)Engine\Extras;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Engine\Extras\Cube.h" />
+    <ClInclude Include="Engine\Extras\Sphere.h" />
+    <ClInclude Include="Engine\Source\Editor\Public\Editor.h" />
+    <ClInclude Include="Engine\Source\Editor\Public\Camera\EditorViewportViewState.h" />
+    <ClInclude Include="Engine\Source\Editor\Public\Panels\ControlPanel.h" />
+    <ClInclude Include="Engine\Source\Editor\Public\Panels\OutputLog.h" />
+    <ClInclude Include="Engine\Source\Editor\Public\Panels\PropertyPanel.h" />
+    <ClInclude Include="Engine\Source\Editor\Public\Panels\StatPanel.h" />
+    <ClInclude Include="Engine\Source\Editor\Public\Viewport\EditorViewport.h" />
+    <ClInclude Include="Engine\Source\Editor\Public\Viewport\EditorViewportClient.h" />
+    <ClInclude Include="Engine\Source\Editor\Public\Viewport\EditorViewportState.h" />
+    <ClInclude Include="Engine\Source\Runtime\ApplicationCore\Public\GenericPlatform\GenericApplication.h" />
+    <ClInclude Include="Engine\Source\Runtime\ApplicationCore\Public\GenericPlatform\GenericApplicationMessageHandler.h" />
+    <ClInclude Include="Engine\Source\Runtime\ApplicationCore\Public\Input\InputEvent.h" />
+    <ClInclude Include="Engine\Source\Runtime\ApplicationCore\Public\Windows\WindowsApplication.h" />
+    <ClInclude Include="Engine\Source\Runtime\ApplicationCore\Public\Windows\WindowsWindow.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreEngine\Public\StaticMeshResources.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreUObject\Public\Class.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreUObject\Public\EngineStatics.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreUObject\Public\Object.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreUObject\Public\ObjectArray.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreUObject\Public\ObjectFactory.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreUObject\Public\UObject\UObjectGlobals.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\CoreGlobals.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Containers\Array.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Containers\Deque.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Containers\List.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Containers\Map.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Containers\Queue.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Containers\Set.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Containers\StaticArray.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Math\Intersection.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Math\MathConstants.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Math\MathUtility.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Math\ProjectionUtils.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Math\Ray.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Misc\UnrealString.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\GenericPlatform\GenericPlatformMemory.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\HAL\MemoryBase.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\HAL\Platform.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Logging\LogMacros.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Logging\LogOutputDevice.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\HAL\PlatformMemory.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\HAL\UnrealMemory.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Math\Matrix.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Math\Rotator.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Math\Vector.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Math\Vector4.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Math\CameraMath.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Templates\Tuple.h" />
+    <ClInclude Include="Engine\Source\Runtime\Core\Public\Windows\WindowsPlatformMemory.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreEngine\Public\Components.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreEngine\Public\Components\ActorComponent.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreEngine\Public\Components\CubeComp.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreEngine\Public\Components\MeshComponent.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreEngine\Public\Components\PlaneComp.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreEngine\Public\Components\PrimitiveComponent.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreEngine\Public\Components\SceneComponent.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreEngine\Public\Components\SphereComp.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreEngine\Public\Components\StaticMeshComponent.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreEngine\Public\EngineGlobals.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreEngine\Public\Engine\Engine.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreEngine\Public\Engine\PrimitiveType.h" />
+    <ClInclude Include="Engine\Source\Editor\Public\SceneFileIO.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreEngine\Public\Engine\StaticMesh.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreEngine\Public\Engine\World.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreEngine\Public\GameFramework\Actor.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreEngine\Public\PrimitiveSceneProxy.h" />
+    <ClInclude Include="Engine\Source\Runtime\CoreEngine\Public\StaticMeshSceneProxy.h" />
+    <ClInclude Include="Engine\Source\Runtime\Json\Public\SceneJson.h" />
+    <ClInclude Include="Engine\Source\Runtime\Json\Public\SceneRawData.h" />
+    <ClInclude Include="Engine\Source\Runtime\Launch\Public\LaunchEngineLoop.h" />
+    <ClInclude Include="Engine\Source\Runtime\Renderer\Public\D3D11\D3D11DynamicRHI.h" />
+    <ClInclude Include="Engine\Source\Runtime\Renderer\Public\D3D11\D3D11PickingPass.h" />
+    <ClInclude Include="Engine\Source\Runtime\Renderer\Public\D3D11\D3D11EditorOverlayRenderer.h" />
+    <ClInclude Include="Engine\Source\Runtime\Renderer\Public\EditorRenderState.h" />
+    <ClInclude Include="Engine\Source\Runtime\Renderer\Public\MeshRenderState.h" />
+    <ClInclude Include="Engine\Source\Runtime\Renderer\Public\RendererModule.h" />
+    <ClInclude Include="Engine\Source\Runtime\Renderer\Public\Scene.h" />
+    <ClInclude Include="Engine\Source\Runtime\Renderer\Public\SceneView.h" />
+    <ClInclude Include="Engine\Source\Runtime\Renderer\Public\D3D11\D3D11MeshPassRenderer.h" />
+    <ClInclude Include="Engine\Source\Runtime\SlateCore\Public\UIManager.h" />
+    <ClInclude Include="Engine\Source\Runtime\Slate\Public\UIMaster.h" />
+    <ClInclude Include="Engine\Source\Runtime\Slate\Public\UIPanel.h" />
+    <ClInclude Include="Engine\Source\ThirdParty\imgui\imconfig.h" />
+    <ClInclude Include="Engine\Source\ThirdParty\imgui\imgui.h" />
+    <ClInclude Include="Engine\Source\ThirdParty\imgui\imgui_impl_dx11.h" />
+    <ClInclude Include="Engine\Source\ThirdParty\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="Engine\Source\ThirdParty\imgui\imgui_internal.h" />
+    <ClInclude Include="Engine\Source\ThirdParty\imgui\imgui_stdlib.h" />
+    <ClInclude Include="Engine\Source\ThirdParty\imgui\imstb_rectpack.h" />
+    <ClInclude Include="Engine\Source\ThirdParty\imgui\imstb_textedit.h" />
+    <ClInclude Include="Engine\Source\ThirdParty\imgui\imstb_truetype.h" />
+    <ClInclude Include="Engine\Source\ThirdParty\nlohmann\json.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Engine\Source\Editor\Private\Editor.cpp" />
+    <ClCompile Include="Engine\Source\Editor\Private\Panels\ControlPanel.cpp" />
+    <ClCompile Include="Engine\Source\Editor\Private\Panels\OutputLog.cpp" />
+    <ClCompile Include="Engine\Source\Editor\Private\Panels\PropertyPanel.cpp" />
+    <ClCompile Include="Engine\Source\Editor\Private\Panels\StatPanel.cpp" />
+    <ClCompile Include="Engine\Source\Editor\Private\Viewport\EditorViewport.cpp" />
+    <ClCompile Include="Engine\Source\Editor\Private\Viewport\EditorViewportClient.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\ApplicationCore\Private\Windows\WindowsApplication.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\ApplicationCore\Private\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreEngine\Private\Components\ActorComponent.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreEngine\Private\Components\StaticMeshComponent.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreEngine\Private\PrimitiveSceneProxy.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreEngine\Private\StaticMeshSceneProxy.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreEngine\Public\Engine\StaticMesh.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreEngine\Public\StaticMeshResources.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreUObject\Private\Class.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreUObject\Private\EngineStatics.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreUObject\Private\Object.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreUObject\Private\ObjectArray.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreUObject\Private\ObjectFactory.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreUObject\Private\UObject\UObjectGlobals.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Core\Private\Logging\LogOutputDevice.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Core\Private\GenericPlatform\GenericPlatformMemory.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Core\Private\HAL\MemoryBase.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Core\Private\HAL\UnrealMemory.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Core\Private\Math\MathUtility.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Core\Private\Math\Matrix.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Core\Private\Math\Rotator.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Core\Private\Math\Vector.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Core\Private\Math\Vector4.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Core\Private\Misc\CoreGlobals.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Core\Private\Windows\WindowsPlatformMemory.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreEngine\Private\Components\CubeComp.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreEngine\Private\Components\PlaneComp.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreEngine\Private\Components\PrimitiveComponent.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreEngine\Private\Components\SceneComponent.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreEngine\Private\Components\SphereComp.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreEngine\Private\EngineGlobals.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreEngine\Private\Engine\Engine.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreEngine\Private\Engine\PrimitiveType.cpp" />
+    <ClCompile Include="Engine\Source\Editor\Private\SceneFileIO.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreEngine\Private\Engine\World.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\CoreEngine\Private\GameFramework\Actor.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Json\Private\SceneJson.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Launch\Private\LaunchEngineLoop.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Launch\Private\Windows\Launch.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Renderer\Private\D3D11\D3D11DynamicRHI.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Renderer\Private\D3D11\D3D11PickingPass.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Renderer\Private\D3D11\D3D11MeshPassRenderer.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Renderer\Private\D3D11\D3D11EditorOverlayRenderer.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Renderer\Private\RendererModule.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Renderer\Private\SceneView.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\SlateCore\Private\UIManager.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Slate\Private\UIHorizontalPanel.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Slate\Private\UIMaster.cpp" />
+    <ClCompile Include="Engine\Source\Runtime\Slate\Private\UIPanel.cpp" />
+    <ClInclude Include="Engine\Source\Runtime\Slate\Public\UIHorizontalPanel.h" />
+    <ClCompile Include="Engine\Source\ThirdParty\imgui\imgui.cpp" />
+    <ClCompile Include="Engine\Source\ThirdParty\imgui\imgui_demo.cpp" />
+    <ClCompile Include="Engine\Source\ThirdParty\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Engine\Source\ThirdParty\imgui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="Engine\Source\ThirdParty\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="Engine\Source\ThirdParty\imgui\imgui_stdlib.cpp" />
+    <ClCompile Include="Engine\Source\ThirdParty\imgui\imgui_tables.cpp" />
+    <ClCompile Include="Engine\Source\ThirdParty\imgui\imgui_widgets.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
